@@ -2,19 +2,19 @@ package edu.hm.cs.swa.model;
 
 public class Book extends Medium {
 
-    private final String author;
+    String author;
 
-    private final String isbn;
-
-
-    public Book() {
-
-    }
+    String isbn;
 
 
-    public Book(final String author, final String isbn, final String) {
+    public Book(final String author, final String isbn, final String title) {
+        super(title);
         this.author = author;
         this.isbn = isbn;
+    }
+    
+    Book() {
+        
     }
 
 
