@@ -6,6 +6,10 @@ import edu.hm.cs.swa.model.Medium;
 
 public class MediaServiceImpl implements MediaService {
 
+    MediaServiceImpl() {
+        
+    }
+    
     @Override
     public MediaServiceResult addBook(Book newBook) {
         // TODO Auto-generated method stub
