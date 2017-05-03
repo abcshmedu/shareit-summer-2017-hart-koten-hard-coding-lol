@@ -8,7 +8,7 @@ import edu.hm.cs.swa.model.Medium;
  * Created by CaptainEinsicht on 03.05.2017.
  * Alle Rechte vorbehalten bei Missbrauch wird zurück Missbraucht
  */
-public interface MediaServvice {
+public interface MediaService {
 
     MediaServiceResult addBook(Book newBook);
 
