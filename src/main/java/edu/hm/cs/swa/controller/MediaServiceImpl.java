@@ -6,11 +6,16 @@ import edu.hm.cs.swa.model.Medium;
 
 public class MediaServiceImpl implements MediaService {
 
+    public MediaServiceImpl() {
+    }
+
+
     @Override
     public MediaServiceResult addBook(Book newBook) {
         // TODO Auto-generated method stub
         return null;
     }
+
 
     @Override
     public MediaServiceResult addDisc(Disc newDisc) {
@@ -18,11 +23,13 @@ public class MediaServiceImpl implements MediaService {
         return null;
     }
 
+
     @Override
     public Medium[] getBooks() {
         // TODO Auto-generated method stub
         return null;
     }
+
 
     @Override
     public Medium[] getDiscs() {
@@ -30,11 +37,13 @@ public class MediaServiceImpl implements MediaService {
         return null;
     }
 
+
     @Override
     public MediaServiceResult updateBook(Book oldBook) {
         // TODO Auto-generated method stub
         return null;
     }
+
 
     @Override
     public MediaServiceResult updateDisc(Disc oldDisc) {
