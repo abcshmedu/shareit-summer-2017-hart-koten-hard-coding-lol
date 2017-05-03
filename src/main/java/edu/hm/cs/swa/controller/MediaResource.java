@@ -10,7 +10,7 @@ public class MediaResource {
     }
     
     public Response createBook(Book book) {
-        return Response.ok().build();
+        return Response.status(200).build();
     }
     
     public Response getBooks() {
