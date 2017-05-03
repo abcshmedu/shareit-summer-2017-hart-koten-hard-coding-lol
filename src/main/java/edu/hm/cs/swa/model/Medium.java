@@ -1,6 +1,6 @@
 package edu.hm.cs.swa.model;
 
-public class Medium {
+abstract class Medium {
     String title;
 
     Medium(String title) {
