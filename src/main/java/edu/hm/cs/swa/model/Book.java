@@ -26,8 +26,7 @@ public class Book extends Medium {
 
         final Book book = (Book) o;
 
-        if (!author.equals(book.author)) return false;
-        return isbn.equals(book.isbn);
+        return author.equals(book.author) && isbn.equals(book.isbn);
     }
 
 

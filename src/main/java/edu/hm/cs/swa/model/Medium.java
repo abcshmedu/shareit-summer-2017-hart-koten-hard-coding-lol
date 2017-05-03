@@ -1,16 +1,19 @@
 package edu.hm.cs.swa.model;
 
-public class Medium {
+public abstract class Medium {
     String title;
+
 
     Medium(String title) {
         this.title = title;
     }
 
+
     Medium() {
-        
+
     }
-    
+
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -19,22 +22,29 @@ public class Medium {
         return result;
     }
 
+
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         Medium other = (Medium) obj;
         if (title == null) {
-            if (other.title != null)
+            if (other.title != null) {
                 return false;
-        } else if (!title.equals(other.title))
+            }
+        } else if (!title.equals(other.title)) {
             return false;
+        }
         return true;
     }
+
 
     public String getTitle() {
         return title;
