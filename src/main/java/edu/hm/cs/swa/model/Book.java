@@ -30,7 +30,6 @@ public class Book extends Medium {
         return isbn.equals(book.isbn);
     }
 
-
     @Override
     public int hashCode() {
         int result = author.hashCode();

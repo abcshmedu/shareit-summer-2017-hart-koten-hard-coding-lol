@@ -15,18 +15,6 @@ public class JettyStarter {
     public static final int PORT = 8082;
 
     public static final String WEBAPP_DIR = "./src/main/webapp/";
-<<<<<<< HEAD
-    
-=======
-
-
->>>>>>> branch 'master' of https://github.com/abcshmedu/shareit-summer-2017-hart-koten-hard-coding-lol
-    /**
-     * Deploy local directories using Jetty without needing a container-based deployment.
-     *
-     * @param args unused
-     * @throws Exception might throw for several reasons.
-     */
 
     public static void main(String... args) throws Exception {
         Server jetty = new Server(PORT);
