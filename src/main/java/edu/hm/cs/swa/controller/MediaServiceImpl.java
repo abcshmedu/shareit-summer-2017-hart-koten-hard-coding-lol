@@ -35,7 +35,6 @@ public class MediaServiceImpl implements MediaService {
         return msr;
     }
 
-
     @Override
     public MediaServiceResult addDisc(Disc newDisc) {
         // TODO Auto-generated method stub
@@ -66,6 +65,19 @@ public class MediaServiceImpl implements MediaService {
 
     @Override
     public MediaServiceResult updateDisc(Disc oldDisc) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+
+    @Override
+    public MediaServiceResult getBook(String isbn) {
+        return null;
+    }
+
+
+    @Override
+    public MediaServiceResult getDisc(String barcode) {
         // TODO Auto-generated method stub
         return null;
     }

@@ -18,6 +18,10 @@ public interface MediaService {
 
     Medium[] getDiscs();
 
+    MediaServiceResult getBook(String isbn);
+    
+    MediaServiceResult getDisc(String barcode);
+    
     MediaServiceResult updateBook(Book oldBook);
 
     MediaServiceResult updateDisc(Disc oldDisc);

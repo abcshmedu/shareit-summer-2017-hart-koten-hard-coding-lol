@@ -6,6 +6,8 @@ import edu.hm.cs.swa.model.Disc;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 
+import org.json.JSONObject;
+
 public class MediaResource {
 
     MediaService ms = new MediaServiceImpl();
@@ -17,7 +19,6 @@ public class MediaResource {
 
     @POST
     @Path("/media/books")
-    @Produces("application/json")
     public Response createBook(Book book) {
 
         MediaServiceResult msr = ms.addBook(book);
@@ -30,7 +31,11 @@ public class MediaResource {
     @Path("/media/books/{isbn}")
     @Produces("application/json")
     public Response getBook(@PathParam("isbn") String isbn) {
-        return Response.status(200).build();
+        MediaServiceResult msr = ms.getBook(isbn);
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("Status: ", msr.getStatus());
+        return Response.status(msr.getCode()).entity(jsonObject.toString()).build();
     }
 
 
@@ -44,7 +49,6 @@ public class MediaResource {
 
     @PUT
     @Path("/media/books/{isbn}")
-    @Produces("application/json")
     public Response updateBook(Book book) {
         return Response.ok().build();
     }
