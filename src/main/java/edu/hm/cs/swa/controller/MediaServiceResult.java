@@ -1,6 +1,6 @@
 package edu.hm.cs.swa.controller;
 
-import javax.net.ssl.SSLEngineResult.Status;
+import javax.ws.rs.core.Response.Status;
 
 /**
  * Created by CaptainEinsicht on 03.05.2017. Alle Rechte vorbehalten bei
@@ -8,20 +8,26 @@ import javax.net.ssl.SSLEngineResult.Status;
  */
 public enum MediaServiceResult {
 
-    OK(200), INVALID_ISBN(300), ISBN_TAKEN(301), AUTHOR_OR_TITLE_MISSING(302), ISBN_NOT_FOUND(303),
-    MODIFIY_ISBN(304), AUTHOR_AND_TITLE_MISSING(305);
+    OK(Status.OK.getStatusCode(), Status.OK), INVALID_ISBN(Status.NOT_ACCEPTABLE.getStatusCode(),
+            Status.NOT_ACCEPTABLE), ISBN_TAKEN(301, Status.GONE), AUTHOR_OR_TITLE_MISSING(
+                    Status.PARTIAL_CONTENT.getStatusCode(), Status.PARTIAL_CONTENT), ISBN_NOT_FOUND(
+                            Status.NOT_FOUND.getStatusCode(), Status.NOT_FOUND), MODIFIY_ISBN(
+                                    Status.NOT_MODIFIED.getStatusCode(), Status.NOT_MODIFIED), AUTHOR_AND_TITLE_MISSING(
+                                            Status.NO_CONTENT.getStatusCode(), Status.NO_CONTENT);
 
-    private int statusCode;
+    private Status status;
+    private int code;
 
-    private MediaServiceResult(int statusCode) {
-        this.statusCode = statusCode;
+    MediaServiceResult(int code, Status status) {
+        this.code = code;
+        this.status = status;
     }
 
-    public int getStatusCode() {
-        return statusCode;
+    public Status getStatus() {
+        return status;
     }
 
-    public void setStatusCode(int statusCode) {
-        this.statusCode = statusCode;
+    public int getCode() {
+        return code;
     }
 }
