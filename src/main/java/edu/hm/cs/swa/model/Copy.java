@@ -7,7 +7,6 @@ public class Copy {
     private String owner;
 
 
-
     public Copy(final Medium medium, final String owner) {
         this.medium = medium;
         this.owner = owner;
