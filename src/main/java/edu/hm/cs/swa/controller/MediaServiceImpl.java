@@ -37,35 +37,46 @@ public class MediaServiceImpl implements MediaService {
 
     @Override
     public MediaServiceResult addDisc(Disc newDisc) {
-        // TODO Auto-generated method stub
-        return null;
+        MediaServiceResult msr = MediaServiceResult.OK;
+
+        if (newDisc.getBarcode() == null) {
+            msr = MediaServiceResult.ISBN_NOT_FOUND;
+        } else if (discHashMap.containsKey(newDisc.getBarcode())) {
+            msr = MediaServiceResult.ISBN_TAKEN;
+        } else if (newDisc.getDirector() == null || newDisc.getTitle() == null) {
+            msr = MediaServiceResult.AUTHOR_OR_TITLE_MISSING;
+        } else {
+            discHashMap.put(newDisc.getBarcode(), newDisc);
+        }
+
+        return msr;
     }
 
 
     @Override
     public Medium[] getBooks() {
-        // TODO Auto-generated method stub
+
         return null;
     }
 
 
     @Override
     public Medium[] getDiscs() {
-        // TODO Auto-generated method stub
+
         return null;
     }
 
 
     @Override
     public MediaServiceResult updateBook(Book oldBook) {
-        // TODO Auto-generated method stub
+
         return null;
     }
 
 
     @Override
     public MediaServiceResult updateDisc(Disc oldDisc) {
-        // TODO Auto-generated method stub
+
         return null;
     }
 
