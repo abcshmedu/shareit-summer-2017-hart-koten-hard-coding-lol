@@ -84,8 +84,8 @@ public class MediaResource {
 
         List<Medium> allB = Arrays.stream(allBooks).collect(Collectors.toList());
         try {
-            String node = mapper.writeValueAsString(allB);
-            return Response.status(Response.Status.OK).entity(node).build()
+            String result = mapper.writeValueAsString(allB);
+            return Response.status(Response.Status.OK).entity(result).build();
 
         } catch (JsonProcessingException e) {
             e.printStackTrace();
