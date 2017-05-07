@@ -112,7 +112,7 @@ public class MediaServiceImpl implements MediaService {
 
         if (discToChange == null) {
             result = MediaServiceResult.ISBN_NOT_FOUND;
-        } else if (discToChange.getDirector() == null || discToChange.getTitle() == null) {
+        } else if (newDisc.getDirector() == null || newDisc.getTitle() == null) {
             result = MediaServiceResult.AUTHOR_OR_TITLE_MISSING;
         } else {
             discHashMap.replace(newDisc.getBarcode(), newDisc);

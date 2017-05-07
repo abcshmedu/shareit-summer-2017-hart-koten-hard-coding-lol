@@ -7,7 +7,7 @@ import edu.hm.cs.swa.model.Disc;
 import edu.hm.cs.swa.model.Medium;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class MediaServiceImplTest {
 
@@ -71,6 +71,73 @@ public class MediaServiceImplTest {
         assertEquals(book, this.book);
         book = msi.getBook("voirjefwhgbiksjhbgfn");
         assertEquals(book, null);
+    }
+
+
+    @Test
+    public void getDiscTest() {
+        msi.addDisc(this.disc);
+        Medium disc = msi.getDisc("123456789");
+        assertEquals(disc, this.disc);
+        disc = msi.getDisc("sojhbgfijdhkg");
+        assertEquals(disc, null);
+    }
+
+
+    @Test
+    public void getBooksTest() {
+        msi.addBook(book);
+        Medium[] expectedBooks = new Medium[1];
+        expectedBooks[0] = book;
+        assertArrayEquals(expectedBooks, msi.getBooks());
+
+        expectedBooks[0] = book1;
+        assertNotEquals(expectedBooks, msi.getBooks());
+    }
+
+
+    @Test
+    public void getDiscsTest() {
+        msi.addDisc(disc);
+        Medium[] expectedDiscs = new Medium[1];
+        expectedDiscs[0] = disc;
+        assertArrayEquals(expectedDiscs, msi.getDiscs());
+
+        expectedDiscs[0] = disc1;
+        assertNotEquals(expectedDiscs, msi.getDiscs());
+    }
+
+
+    @Test
+    public void updateBookTest() {
+        msi.addBook(book);
+        Book newBook = new Book("niemand", "0192301293012930", "was immer man will");
+        MediaServiceResult msr = msi.updateBook(newBook);
+        assertEquals(msr, MediaServiceResult.OK);
+        msr = msi.updateBook(new Book("pifn", "jedbhfgv", "dfljh"));
+        assertEquals(msr, MediaServiceResult.ISBN_NOT_FOUND);
+        msr = msi.updateBook(new Book(null, "0192301293012930", "edhbgf"));
+        assertEquals(msr, MediaServiceResult.AUTHOR_OR_TITLE_MISSING);
+        msr = msi.updateBook(new Book("dpoihg", "0192301293012930", null));
+        assertEquals(msr, MediaServiceResult.AUTHOR_OR_TITLE_MISSING);
+    }
+
+
+    @Test
+    public void updateDiscTest() {
+        msi.addDisc(disc);
+        Disc newdisc = new Disc("123456789", "niemand", 18, "was immer man will");
+        MediaServiceResult msr = msi.updateDisc(newdisc);
+        assertEquals(msr, MediaServiceResult.OK);
+
+        msr = msi.updateDisc(new Disc("987461320", "ojfnb", 18, "dffgojnbh"));
+        assertEquals(msr, MediaServiceResult.ISBN_NOT_FOUND);
+
+        msr = msi.updateDisc(new Disc("123456789", null, 18, "ojdsbf"));
+        assertEquals(msr, MediaServiceResult.AUTHOR_OR_TITLE_MISSING);
+
+        msr = msi.updateDisc(new Disc("123456789", "dojgf", 18, null));
+        assertEquals(msr, MediaServiceResult.AUTHOR_OR_TITLE_MISSING);
     }
 
 }
