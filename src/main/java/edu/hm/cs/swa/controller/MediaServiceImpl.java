@@ -8,8 +8,8 @@ import java.util.HashMap;
 
 /**
  * Implementation of the MediaService.
- * @author Johannes Seidel, Michael Reile.
  *
+ * @author Johannes Seidel, Michael Reile.
  */
 public class MediaServiceImpl implements MediaService {
 
@@ -17,12 +17,14 @@ public class MediaServiceImpl implements MediaService {
 
     private HashMap<String, Disc> discHashMap;
 
+
     /**
      * Default c'tor.
      */
     MediaServiceImpl() {
 
     }
+
 
     @Override
     public MediaServiceResult addBook(Book newBook) {
@@ -40,6 +42,7 @@ public class MediaServiceImpl implements MediaService {
 
         return msr;
     }
+
 
     @Override
     public MediaServiceResult addDisc(Disc newDisc) {
@@ -61,15 +64,26 @@ public class MediaServiceImpl implements MediaService {
 
     @Override
     public Medium[] getBooks() {
-
-        return null;
+        Medium[] allBooks = new Medium[bookHashMap.size()];
+        int counter = 0;
+        for (Book book : bookHashMap.values()) {
+            allBooks[counter] = book;
+            counter++;
+        }
+        return allBooks;
     }
 
 
     @Override
     public Medium[] getDiscs() {
 
-        return null;
+        Medium[] allDiscs = new Medium[discHashMap.size()];
+        int counter = 0;
+        for (Disc disc : discHashMap.values()) {
+            allDiscs[counter] = disc;
+            counter++;
+        }
+        return allDiscs;
     }
 
 
@@ -88,15 +102,14 @@ public class MediaServiceImpl implements MediaService {
 
 
     @Override
-    public MediaServiceResult getBook(String isbn) {
-        return null;
+    public Medium getBook(String isbn) {
+        return bookHashMap.get(isbn);
     }
 
 
     @Override
-    public MediaServiceResult getDisc(String barcode) {
-        // TODO Auto-generated method stub
-        return null;
+    public Medium getDisc(String barcode) {
+        return discHashMap.get(barcode);
     }
 
 }

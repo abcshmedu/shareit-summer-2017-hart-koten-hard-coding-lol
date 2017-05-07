@@ -41,14 +41,14 @@ public interface MediaService {
      * @param isbn isbn of the desired book.
      * @return status code indicating success or failure.
      */
-    MediaServiceResult getBook(String isbn);
+    Medium getBook(String isbn);
     
     /**
      * Get a specific disc, identified by the barcode.
      * @param barcode barcode of the desired disc.
      * @return status code indicating success or failure.
      */
-    MediaServiceResult getDisc(String barcode);
+    Medium getDisc(String barcode);
     
     /**
      * Update an existing book.
