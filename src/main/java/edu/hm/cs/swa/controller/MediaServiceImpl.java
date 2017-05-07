@@ -88,16 +88,38 @@ public class MediaServiceImpl implements MediaService {
 
 
     @Override
-    public MediaServiceResult updateBook(Book oldBook) {
+    public MediaServiceResult updateBook(Book newBook) {
+        final MediaServiceResult result;
+        final Book bookToChange = bookHashMap.get(newBook.getIsbn());
 
-        return null;
+        if (bookToChange == null) {
+            result = MediaServiceResult.ISBN_NOT_FOUND;
+        } else if (newBook.getAuthor() == null || newBook.getTitle() == null) {
+            result = MediaServiceResult.AUTHOR_OR_TITLE_MISSING;
+        } else {
+            bookHashMap.replace(newBook.getIsbn(), newBook);
+            result = MediaServiceResult.OK;
+        }
+
+        return result;
     }
 
 
     @Override
-    public MediaServiceResult updateDisc(Disc oldDisc) {
+    public MediaServiceResult updateDisc(Disc newDisc) {
+        final MediaServiceResult result;
+        final Disc discToChange = discHashMap.get(newDisc.getBarcode());
 
-        return null;
+        if (discToChange == null) {
+            result = MediaServiceResult.ISBN_NOT_FOUND;
+        } else if (discToChange.getDirector() == null || discToChange.getTitle() == null) {
+            result = MediaServiceResult.AUTHOR_OR_TITLE_MISSING;
+        } else {
+            discHashMap.replace(newDisc.getBarcode(), newDisc);
+            result = MediaServiceResult.OK;
+        }
+
+        return result;
     }
 
 

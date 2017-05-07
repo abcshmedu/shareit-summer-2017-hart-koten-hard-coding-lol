@@ -2,8 +2,8 @@ package edu.hm.cs.swa.model;
 
 /**
  * Model class for a book.
- * @author Johannes Seidel, Michael Reile.
  *
+ * @author Johannes Seidel, Michael Reile.
  */
 public class Book extends Medium {
 
@@ -17,24 +17,30 @@ public class Book extends Medium {
      */
     private String isbn;
 
+    private String title;
+
 
     /**
      * Custom constructor for a book.
+     *
      * @param author author of the book.
-     * @param isbn isbn number of the book.
-     * @param title title of the book.
+     * @param isbn   isbn number of the book.
+     * @param title  title of the book.
      */
     public Book(final String author, final String isbn, final String title) {
-        super(title);
+        this.title = title;
         this.author = author;
         this.isbn = isbn;
     }
 
+
     /**
      * Default constructor.
      */
-    Book() {
-
+    private Book() {
+        this.author = "";
+        this.title = "";
+        this.isbn = "";
     }
 
 
@@ -61,15 +67,22 @@ public class Book extends Medium {
 
     @Override
     public String toString() {
-        return "Book{" 
-                + "author='" + author + '\'' 
-                + ", isbn='" + isbn + '\'' 
-                + '}';
+        return "Book{"
+               + "author='" + author + '\''
+               + ", isbn='" + isbn + '\''
+               + '}';
+    }
+
+
+    @Override
+    public String getTitle() {
+        return title;
     }
 
 
     /**
      * Getter for author.
+     *
      * @return author's name.
      */
     public String getAuthor() {
@@ -79,6 +92,7 @@ public class Book extends Medium {
 
     /**
      * Getter for isbn number.
+     *
      * @return isbn number.
      */
     public String getIsbn() {
