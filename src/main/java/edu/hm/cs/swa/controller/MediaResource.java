@@ -8,15 +8,28 @@ import javax.ws.rs.core.Response;
 
 import org.json.JSONObject;
 
+/**
+ * REST-API for ShareIt Service.
+ * @author Johannes Seidel, Michael Reile.
+ *
+ */
 public class MediaResource {
 
-    MediaService ms = new MediaServiceImpl();
+    private static final int OK = 200;
+    
+    private MediaService ms = new MediaServiceImpl();
 
-
+    /**
+     * Default c'tor.
+     */
     MediaResource() {
     }
 
-
+    /**
+     * Creates a book.
+     * @param book Book that will be created.
+     * @return Response indicating success or failure.
+     */
     @POST
     @Path("/media/books")
     public Response createBook(Book book) {
@@ -27,6 +40,11 @@ public class MediaResource {
     }
 
 
+    /**
+     * Get a specific book, identified by its isbn.
+     * @param isbn isbn of desired book.
+     * @return Response with status code and book as json.
+     */
     @GET
     @Path("/media/books/{isbn}")
     @Produces("application/json")
@@ -39,7 +57,10 @@ public class MediaResource {
 
     }
 
-
+    /**
+     * Get all the books available.
+     * @return Response indicating success or failure.
+     */
     @GET
     @Path("/media/books")
     @Produces("application/json")
@@ -47,30 +68,45 @@ public class MediaResource {
         return Response.ok().build();
     }
 
-
+    /**
+     * Update an existing book.
+     * @param book Book that needs to be updated.
+     * @return Response indicating success or failure.
+     */
     @PUT
     @Path("/media/books/{isbn}")
     public Response updateBook(Book book) {
         return Response.ok().build();
     }
 
-
+    /**
+     * Create a new disc.
+     * @param disc Disc that will be created.
+     * @return Status code indicating success or failure.
+     */
     @POST
     @Path("/media/books")
     @Produces("application/json")
     public Response createDisc(Disc disc) {
-        return Response.status(200).build();
+        return Response.status(OK).build();
     }
 
-
+    /**
+     * Get a specific disc, identified by its barcode.
+     * @param barcode Barcode of the desired disc.
+     * @return Status code indicating success or failure.
+     */
     @GET
     @Path("/media/discs/{barcode}")
     @Produces("application/json")
     public Response getDisc(@PathParam("barcode") String barcode) {
-        return Response.status(200).build();
+        return Response.status(OK).build();
     }
 
-
+    /**
+     * Get a list of available discs.
+     * @return Response indicating success or failure.
+     */
     @GET
     @Path("/media/discs")
     @Produces("application/json")
@@ -78,7 +114,11 @@ public class MediaResource {
         return Response.ok().build();
     }
 
-
+    /**
+     * Update an existing disc.
+     * @param disc Disc that needs to be updated.
+     * @return Response indicating success or failure.
+     */
     @PUT
     @Path("/media/discs/{barcode}")
     @Produces("application/json")

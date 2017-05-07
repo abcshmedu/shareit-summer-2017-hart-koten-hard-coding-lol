@@ -10,19 +10,57 @@ import edu.hm.cs.swa.model.Medium;
  */
 public interface MediaService {
 
+    /**
+     * Method for adding a book to library.
+     * @param newBook book that will be added.
+     * @return status code whether successful or not.
+     */
     MediaServiceResult addBook(Book newBook);
 
+    /**
+     * Method for adding a disc to library.
+     * @param newDisc disc that will be added.
+     * @return status code whether successful or not.
+     */
     MediaServiceResult addDisc(Disc newDisc);
 
+    /**
+     * Get the list of books.
+     * @return An array of books available.
+     */
     Medium[] getBooks();
 
+    /**
+     * Get the list of discs.
+     * @return An array of discs available.
+     */
     Medium[] getDiscs();
 
+    /**
+     * Get a specific book, identified by the isbn.
+     * @param isbn isbn of the desired book.
+     * @return status code indicating success or failure.
+     */
     MediaServiceResult getBook(String isbn);
     
+    /**
+     * Get a specific disc, identified by the barcode.
+     * @param barcode barcode of the desired disc.
+     * @return status code indicating success or failure.
+     */
     MediaServiceResult getDisc(String barcode);
     
+    /**
+     * Update an existing book.
+     * @param oldBook Book that needs to be updated.
+     * @return status code indicating success or failure.
+     */
     MediaServiceResult updateBook(Book oldBook);
 
+    /**
+     * Update an existing disc.
+     * @param oldDisc Disc that needs to be updated.
+     * @return status code indicating success or failure.
+     */
     MediaServiceResult updateDisc(Disc oldDisc);
 }
