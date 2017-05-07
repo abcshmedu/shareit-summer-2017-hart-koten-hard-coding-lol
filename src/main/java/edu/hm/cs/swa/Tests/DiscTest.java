@@ -25,7 +25,9 @@ public class DiscTest {
                      ", director='" + director + '\'' +
                      ", fsk=" + fsk +
                      ", title='" + title + '\'' +
-                     '}', disc);
+                     '}', disc.toString());
+
+        equalsTest();
     }
 
 

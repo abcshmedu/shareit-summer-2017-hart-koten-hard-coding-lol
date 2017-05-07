@@ -18,10 +18,11 @@ public class BookTest {
     @Test
     public void test() {
         Book book = new Book(author, isbn, title);
-        assertEquals(" \"Book{\"\n" +
-                     "               + \"author='\" + author + '\\''\n" +
-                     "               + \", isbn='\" + isbn + '\\''\n" +
-                     "               + '}';", book.toString());
+        assertEquals("Book{"
+                     + "author='" + author + '\''
+                     + ", isbn='" + isbn + '\''
+                     + '}', book.toString());
+        equalsTest();
     }
 
 
