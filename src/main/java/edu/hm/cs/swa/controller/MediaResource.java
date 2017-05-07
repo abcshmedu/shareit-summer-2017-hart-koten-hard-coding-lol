@@ -9,6 +9,9 @@ import org.json.JSONArray;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * REST-API for ShareIt Service.
@@ -77,6 +80,16 @@ public class MediaResource {
         final Medium[] allBooks = ms.getBooks();
 
         JSONArray jsonArray = new JSONArray();
+        ObjectMapper mapper = new ObjectMapper();
+
+        List<Medium> allB = Arrays.stream(allBooks).collect(Collectors.toList());
+        try {
+            String node = mapper.writeValueAsString(allB);
+            return Response.status(Response.Status.OK).entity(node).build()
+
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
 
         for (Medium book : allBooks) {
             jsonArray.put(book.getTitle());
