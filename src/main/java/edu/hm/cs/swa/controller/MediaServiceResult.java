@@ -18,15 +18,28 @@ public enum MediaServiceResult {
     private Status status;
     private int code;
 
+    /**
+     * Custom constructor.
+     * @param code Code number.
+     * @param status Status report.
+     */
     MediaServiceResult(int code, Status status) {
         this.code = code;
         this.status = status;
     }
 
+    /**
+     * Getter for status report.
+     * @return Status.
+     */
     public Status getStatus() {
         return status;
     }
 
+    /**
+     * Getter for code number.
+     * @return code number.
+     */
     public int getCode() {
         return code;
     }

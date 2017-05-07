@@ -6,17 +6,23 @@ import edu.hm.cs.swa.model.Medium;
 
 import java.util.HashMap;
 
+/**
+ * Implementation of the MediaService.
+ * @author Johannes Seidel, Michael Reile.
+ *
+ */
 public class MediaServiceImpl implements MediaService {
 
     private HashMap<String, Book> bookHashMap;
 
     private HashMap<String, Disc> discHashMap;
 
-
+    /**
+     * Default c'tor.
+     */
     MediaServiceImpl() {
 
     }
-
 
     @Override
     public MediaServiceResult addBook(Book newBook) {

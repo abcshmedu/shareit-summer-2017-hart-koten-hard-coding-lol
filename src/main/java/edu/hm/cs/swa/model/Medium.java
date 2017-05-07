@@ -1,14 +1,24 @@
 package edu.hm.cs.swa.model;
 
+/**
+ * Abstract class Medium.
+ * @author Johannes Seidel, Michael Reile.
+ *
+ */
 public abstract class Medium {
-    String title;
+    private String title;
 
-
+    /**
+     * Custom constructor for a medium.
+     * @param title title of the medium.
+     */
     Medium(String title) {
         this.title = title;
     }
 
-
+    /**
+     * Default c'tor.
+     */
     Medium() {
     }
 
@@ -44,7 +54,10 @@ public abstract class Medium {
         return true;
     }
 
-
+    /**
+     * Getter for the title.
+     * @return title.
+     */
     public String getTitle() {
         return title;
     }

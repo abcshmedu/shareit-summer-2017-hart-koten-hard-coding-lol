@@ -1,12 +1,23 @@
 package edu.hm.cs.swa.model;
 
+/**
+ * Model class for a disc.
+ * @author Johannes Seidel, Michael Reile.
+ *
+ */
 public class Disc extends Medium {
 
-    String barcode, director;
+    private String barcode, director;
 
-    int fsk;
+    private int fsk;
 
-
+    /**
+     * Constructor for a disc.
+     * @param barcode barcode of the disc.
+     * @param director director of the disc.
+     * @param fsk fsk of the disc.
+     * @param title title of the disc.
+     */
     Disc(String barcode, String director, int fsk, String title) {
         super(title);
         this.barcode = barcode;
@@ -14,7 +25,9 @@ public class Disc extends Medium {
         this.fsk = fsk;
     }
 
-
+    /**
+     * Default c'tor.
+     */
     Disc() {
 
     }
@@ -63,17 +76,26 @@ public class Disc extends Medium {
         return true;
     }
 
-
+    /**
+     * Getter for barcode.
+     * @return barcode.
+     */
     public String getBarcode() {
         return barcode;
     }
 
-
+    /**
+     * Getter for director.
+     * @return director.
+     */
     public String getDirector() {
         return director;
     }
 
-
+    /**
+     * Getter for fsk.
+     * @return fsk.
+     */
     public int getFsk() {
         return fsk;
     }
