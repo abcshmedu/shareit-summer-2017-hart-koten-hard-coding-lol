@@ -13,15 +13,15 @@ import java.util.HashMap;
  */
 public class MediaServiceImpl implements MediaService {
 
-    private HashMap<String, Book> bookHashMap;
+    private HashMap<String, Book> bookHashMap = new HashMap<>();
 
-    private HashMap<String, Disc> discHashMap;
+    private HashMap<String, Disc> discHashMap = new HashMap<>();
 
 
     /**
      * Default c'tor.
      */
-    MediaServiceImpl() {
+    public MediaServiceImpl() {
 
     }
 

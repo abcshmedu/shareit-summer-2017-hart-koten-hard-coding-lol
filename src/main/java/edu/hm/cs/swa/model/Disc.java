@@ -7,7 +7,9 @@ package edu.hm.cs.swa.model;
  */
 public class Disc extends Medium {
 
-    private String barcode, director;
+    private String barcode;
+
+    private String director;
 
     private int fsk;
 
@@ -99,6 +101,12 @@ public class Disc extends Medium {
      */
     public String getDirector() {
         return director;
+    }
+
+
+    @Override
+    public String getTitle() {
+        return title;
     }
 
 
