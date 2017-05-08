@@ -38,9 +38,9 @@ public class Book extends Medium {
      * Default constructor.
      */
     private Book() {
-            this.author = "";
-            this.title = "";
-            this.isbn = "";
+        this.author = "";
+        this.title = "";
+        this.isbn = "";
     }
 
 
@@ -74,7 +74,6 @@ public class Book extends Medium {
     }
 
 
-    @Override
     public String getTitle() {
         return title;
     }

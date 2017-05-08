@@ -77,10 +77,7 @@ public class Disc extends Medium {
         } else if (!director.equals(other.director)) {
             return false;
         }
-        if (fsk != other.fsk) {
-            return false;
-        }
-        return true;
+        return fsk == other.fsk;
     }
 
 
@@ -104,7 +101,6 @@ public class Disc extends Medium {
     }
 
 
-    @Override
     public String getTitle() {
         return title;
     }

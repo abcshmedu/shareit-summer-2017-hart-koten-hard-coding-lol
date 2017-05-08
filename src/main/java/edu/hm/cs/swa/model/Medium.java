@@ -6,18 +6,6 @@ package edu.hm.cs.swa.model;
  * @author Johannes Seidel, Michael Reile.
  */
 public abstract class Medium {
-    private String title;
-
-
-    /**
-     * Custom constructor for a medium.
-     *
-     * @param title title of the medium.
-     */
-    Medium(String title) {
-        this.title = title;
-    }
-
 
     /**
      * Default c'tor.
@@ -26,7 +14,7 @@ public abstract class Medium {
     }
 
 
-    @Override
+   /* @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
@@ -55,15 +43,6 @@ public abstract class Medium {
             return false;
         }
         return true;
-    }
+    }*/
 
-
-    /**
-     * Getter for the title.
-     *
-     * @return title.
-     */
-    public String getTitle() {
-        return title;
-    }
 }
