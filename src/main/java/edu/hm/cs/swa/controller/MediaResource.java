@@ -65,7 +65,7 @@ public class MediaResource {
         ObjectMapper mapper = new ObjectMapper();
         try {
             String json = mapper.writeValueAsString(searchedBook);
-            return Response.status(Response.Status.OK).entity(json).build();
+            return Response.status(Response.Status.OK).entity(searchedBook).build();
         } catch (JsonProcessingException e) {
             return Response.status(Response.Status.EXPECTATION_FAILED).build();
         }
@@ -89,7 +89,7 @@ public class MediaResource {
         List<Medium> allB = Arrays.stream(allBooks).collect(Collectors.toList());
         try {
             String result = mapper.writeValueAsString(allB);
-            return Response.status(Response.Status.OK).entity(result).build();
+            return Response.status(Response.Status.OK).entity(allBooks).build();
 
         } catch (JsonProcessingException e) {
             e.printStackTrace();
