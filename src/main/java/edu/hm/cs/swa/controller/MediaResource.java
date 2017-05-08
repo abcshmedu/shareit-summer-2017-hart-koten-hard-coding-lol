@@ -8,6 +8,7 @@ import edu.hm.cs.swa.model.Medium;
 import org.json.JSONArray;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Arrays;
 import java.util.List;
@@ -39,6 +40,8 @@ public class MediaResource {
      */
     @POST
     @Path("books")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response createBook(Book book) {
 
         MediaServiceResult msr = ms.addBook(book);
@@ -55,7 +58,7 @@ public class MediaResource {
      */
     @GET
     @Path("books/{isbn}")
-    @Produces("application/json")
+    @Produces(MediaType.APPLICATION_JSON)
     public Response getBook(@PathParam("isbn") String isbn) {
         final Medium searchedBook = ms.getBook(isbn);
 
@@ -76,7 +79,7 @@ public class MediaResource {
      */
     @GET
     @Path("books")
-    @Produces("application/json")
+    //@Produces(MediaType.APPLICATION_JSON)
     public Response getBooks() {
         final Medium[] allBooks = ms.getBooks();
 
@@ -108,6 +111,8 @@ public class MediaResource {
      */
     @PUT
     @Path("books/{isbn}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response updateBook(Book book) {
         MediaServiceResult msr = ms.updateBook(book);
 
@@ -123,6 +128,8 @@ public class MediaResource {
      */
     @POST
     @Path("books")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response createDisc(Disc disc) {
         MediaServiceResult msr = ms.addDisc(disc);
 
@@ -138,7 +145,7 @@ public class MediaResource {
      */
     @GET
     @Path("discs/{barcode}")
-    @Produces("application/json")
+    @Produces(MediaType.APPLICATION_JSON)
     public Response getDisc(@PathParam("barcode") String barcode) {
 
         final Medium searchedDisc = ms.getDisc(barcode);
@@ -160,7 +167,7 @@ public class MediaResource {
      */
     @GET
     @Path("discs")
-    @Produces("application/json")
+    @Produces(MediaType.APPLICATION_JSON)
     public Response getDiscs() {
 
         final Medium[] allDiscs = ms.getDiscs();
@@ -182,7 +189,8 @@ public class MediaResource {
      */
     @PUT
     @Path("discs/{barcode}")
-    @Produces("application/json")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response updateDisc(Disc disc) {
         MediaServiceResult msr = ms.updateDisc(disc);
 
