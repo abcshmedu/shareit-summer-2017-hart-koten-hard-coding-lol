@@ -64,13 +64,14 @@ public class MediaServiceImpl implements MediaService {
 
     @Override
     public Medium[] getBooks() {
-        Medium[] allBooks = new Medium[bookHashMap.size()];
-        int counter = 0;
-        for (Book book : bookHashMap.values()) {
-            allBooks[counter] = book;
-            counter++;
-        }
-        return allBooks;
+//        Medium[] allBooks = new Medium[bookHashMap.size()];
+//        int counter = 0;
+//        for (Book book : bookHashMap.values()) {
+//            allBooks[counter] = book;
+//            counter++;
+//        }
+//        return allBooks;
+        return bookHashMap.values().toArray(new Book[bookHashMap.size()]);
     }
 
     @Override

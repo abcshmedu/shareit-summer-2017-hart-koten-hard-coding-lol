@@ -6,7 +6,9 @@ import edu.hm.cs.swa.model.Book;
 import edu.hm.cs.swa.model.Disc;
 import edu.hm.cs.swa.model.Medium;
 import org.json.JSONArray;
+import org.json.JSONObject;
 
+import javax.naming.spi.DirStateFactory.Result;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -19,7 +21,7 @@ import java.util.stream.Collectors;
  *
  * @author Johannes Seidel, Michael Reile.
  */
-@Path("media")
+@Path("/media")
 public class MediaResource {
 
     private MediaService ms = new MediaServiceImpl();
@@ -39,14 +41,23 @@ public class MediaResource {
      * @return Response indicating success or failure.
      */
     @POST
-    @Path("books")
+    @Path("/books")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response createBook(Book book) {
-
         MediaServiceResult msr = ms.addBook(book);
-
-        return Response.status(msr.getCode()).build();
+        JSONObject json = new JSONObject();
+        json.put("status:", msr.getStatus());
+        
+        return Response.status(msr.getCode()).entity(json).build();
+//        ObjectMapper mapper = new ObjectMapper();
+//        String json = "";
+//        try {
+//            json = mapper.writeValueAsString(msr.getStatus());
+//        } catch (JsonProcessingException e) {
+//            e.printStackTrace();
+//        }
+//        return Response.status(msr.getCode()).entity(json).build();
     }
 
 
@@ -57,7 +68,7 @@ public class MediaResource {
      * @return Response with status code and book as json.
      */
     @GET
-    @Path("books/{isbn}")
+    @Path("/books/{isbn}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getBook(@PathParam("isbn") String isbn) {
         final Medium searchedBook = ms.getBook(isbn);
@@ -78,28 +89,29 @@ public class MediaResource {
      * @return Response indicating success or failure.
      */
     @GET
-    @Path("books")
+    @Path("/books")
     //@Produces(MediaType.APPLICATION_JSON)
-    public Response getBooks() {
-        final Medium[] allBooks = ms.getBooks();
-
-        JSONArray jsonArray = new JSONArray();
-        ObjectMapper mapper = new ObjectMapper();
-
-        List<Medium> allB = Arrays.stream(allBooks).collect(Collectors.toList());
-        try {
-            String result = mapper.writeValueAsString(allB);
-            return Response.status(Response.Status.OK).entity(allBooks).build();
-
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-
-        }
-
-        for (Medium book : allBooks) {
-            jsonArray.put(book.getTitle());
-        }
-        return Response.status(Response.Status.OK).entity(jsonArray.toString()).build();
+    public Book[] getBooks() {
+        return (Book[]) ms.getBooks();
+//        final Medium[] allBooks = ms.getBooks();
+//
+//        JSONArray jsonArray = new JSONArray();
+//        ObjectMapper mapper = new ObjectMapper();
+//
+//        List<Medium> allB = Arrays.stream(allBooks).collect(Collectors.toList());
+//        try {
+//            String result = mapper.writeValueAsString(allB);
+//            return Response.status(Response.Status.OK).entity(allBooks).build();
+//
+//        } catch (JsonProcessingException e) {
+//            e.printStackTrace();
+//
+//        }
+//
+//        for (Medium book : allBooks) {
+//            jsonArray.put(book.getTitle());
+//        }
+//        return Response.status(Response.Status.OK).entity(jsonArray.toString()).build();
     }
 
 
@@ -110,7 +122,7 @@ public class MediaResource {
      * @return Response indicating success or failure.
      */
     @PUT
-    @Path("books/{isbn}")
+    @Path("/books/{isbn}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateBook(Book book) {
@@ -127,7 +139,7 @@ public class MediaResource {
      * @return Status code indicating success or failure.
      */
     @POST
-    @Path("books")
+    @Path("/books")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response createDisc(Disc disc) {
@@ -144,7 +156,7 @@ public class MediaResource {
      * @return Status code indicating success or failure.
      */
     @GET
-    @Path("discs/{barcode}")
+    @Path("/discs/{barcode}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getDisc(@PathParam("barcode") String barcode) {
 
@@ -166,7 +178,7 @@ public class MediaResource {
      * @return Response indicating success or failure.
      */
     @GET
-    @Path("discs")
+    @Path("/discs")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getDiscs() {
 
@@ -188,7 +200,7 @@ public class MediaResource {
      * @return Response indicating success or failure.
      */
     @PUT
-    @Path("discs/{barcode}")
+    @Path("/discs/{barcode}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateDisc(Disc disc) {
