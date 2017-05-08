@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
  *
  * @author Johannes Seidel, Michael Reile.
  */
+@Path("media")
 public class MediaResource {
 
     private MediaService ms = new MediaServiceImpl();
@@ -37,12 +38,12 @@ public class MediaResource {
      * @return Response indicating success or failure.
      */
     @POST
-    @Path("/media/books")
+    @Path("books")
     public Response createBook(Book book) {
 
         MediaServiceResult msr = ms.addBook(book);
 
-        return Response.status(msr.getStatus()).build();
+        return Response.status(msr.getCode()).build();
     }
 
 
@@ -53,7 +54,7 @@ public class MediaResource {
      * @return Response with status code and book as json.
      */
     @GET
-    @Path("/media/books/{isbn}")
+    @Path("books/{isbn}")
     @Produces("application/json")
     public Response getBook(@PathParam("isbn") String isbn) {
         final Medium searchedBook = ms.getBook(isbn);
@@ -74,7 +75,7 @@ public class MediaResource {
      * @return Response indicating success or failure.
      */
     @GET
-    @Path("/media/books")
+    @Path("books")
     @Produces("application/json")
     public Response getBooks() {
         final Medium[] allBooks = ms.getBooks();
@@ -89,6 +90,7 @@ public class MediaResource {
 
         } catch (JsonProcessingException e) {
             e.printStackTrace();
+
         }
 
         for (Medium book : allBooks) {
@@ -105,7 +107,7 @@ public class MediaResource {
      * @return Response indicating success or failure.
      */
     @PUT
-    @Path("/media/books/{isbn}")
+    @Path("books/{isbn}")
     public Response updateBook(Book book) {
         MediaServiceResult msr = ms.updateBook(book);
 
@@ -120,11 +122,11 @@ public class MediaResource {
      * @return Status code indicating success or failure.
      */
     @POST
-    @Path("/media/books")
+    @Path("books")
     public Response createDisc(Disc disc) {
         MediaServiceResult msr = ms.addDisc(disc);
 
-        return Response.status(msr.getStatus()).build();
+        return Response.status(msr.getCode()).build();
     }
 
 
@@ -135,7 +137,7 @@ public class MediaResource {
      * @return Status code indicating success or failure.
      */
     @GET
-    @Path("/media/discs/{barcode}")
+    @Path("discs/{barcode}")
     @Produces("application/json")
     public Response getDisc(@PathParam("barcode") String barcode) {
 
@@ -157,7 +159,7 @@ public class MediaResource {
      * @return Response indicating success or failure.
      */
     @GET
-    @Path("/media/discs")
+    @Path("discs")
     @Produces("application/json")
     public Response getDiscs() {
 
@@ -179,7 +181,7 @@ public class MediaResource {
      * @return Response indicating success or failure.
      */
     @PUT
-    @Path("/media/discs/{barcode}")
+    @Path("discs/{barcode}")
     @Produces("application/json")
     public Response updateDisc(Disc disc) {
         MediaServiceResult msr = ms.updateDisc(disc);
