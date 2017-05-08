@@ -73,7 +73,6 @@ public class MediaServiceImpl implements MediaService {
         return allBooks;
     }
 
-
     @Override
     public Medium[] getDiscs() {
 
@@ -133,5 +132,9 @@ public class MediaServiceImpl implements MediaService {
     public Medium getDisc(String barcode) {
         return discHashMap.get(barcode);
     }
+    
+//    public Boolean validateISBN(String isbn) {
+//        
+//    }
 
 }
