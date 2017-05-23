@@ -30,7 +30,9 @@ public class MediaServiceImpl implements MediaService {
     public MediaServiceResult addBook(Book newBook) {
         MediaServiceResult msr = MediaServiceResult.OK;
 
-        if (newBook.getIsbn() == null) {
+        if (!validISBN(newBook.getIsbn())) {
+            msr = MediaServiceResult.INVALID_ISBN;
+        } else if (newBook.getIsbn() == null) {
             msr = MediaServiceResult.ISBN_NOT_FOUND;
         } else if (bookHashMap.containsKey(newBook.getIsbn())) {
             msr = MediaServiceResult.ISBN_TAKEN;
@@ -73,6 +75,7 @@ public class MediaServiceImpl implements MediaService {
         return allBooks;
         //return bookHashMap.values().toArray(new Book[bookHashMap.size()]);
     }
+
 
     @Override
     public Disc[] getDiscs() {
@@ -133,9 +136,37 @@ public class MediaServiceImpl implements MediaService {
     public Medium getDisc(String barcode) {
         return discHashMap.get(barcode);
     }
-    
-//    public Boolean validateISBN(String isbn) {
-//        
-//    }
 
+
+    private boolean validISBN(String isbn) {
+        if (isbn == null) {
+            return false;
+        }
+
+        isbn = isbn.replaceAll("-", "");
+
+        if (isbn.length() != 13) {
+            return false;
+        }
+
+        try {
+            int tot = 0;
+            for (int i = 0; i < 12; i++) {
+                int digit = Integer.parseInt(isbn.substring(i, i + 1));
+                tot += (i % 2 == 0) ? digit * 1 : digit * 3;
+            }
+
+            //checksum must be 0-9. If calculated as 10 then = 0
+            int checksum = 10 - (tot % 10);
+            if (checksum == 10) {
+                checksum = 0;
+            }
+
+            return checksum == Integer.parseInt(isbn.substring(12));
+        } catch (NumberFormatException nfe) {
+            //to catch invalid ISBNs that have non-numeric characters in them
+            return false;
+        }
+    }
 }
+

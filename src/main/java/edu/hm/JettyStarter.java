@@ -10,14 +10,16 @@ import org.eclipse.jetty.webapp.WebAppContext;
  */
 public class JettyStarter {
 
-    public static final String APP_URL = "/";
+    private static final String APP_URL = "/";
 
-    public static final int PORT = 8082;
+    private static final int PORT = 8082;
 
-    public static final String WEBAPP_DIR = "./src/main/webapp/";
+    private static final String WEBAPP_DIR = "./src/main/webapp/";
+
 
     /**
      * Main method to start Jetty.
+     *
      * @param args arguments.
      * @throws Exception Exception.
      */
