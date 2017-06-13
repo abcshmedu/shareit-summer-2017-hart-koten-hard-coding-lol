@@ -2,7 +2,6 @@ package edu.hm.cs.swa.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.inject.Inject;
 import edu.hm.cs.swa.model.Book;
 import edu.hm.cs.swa.model.Disc;
 import edu.hm.cs.swa.model.Medium;
@@ -23,15 +22,15 @@ import javax.ws.rs.core.Response;
 @Path("/media")
 public class MediaResource {
 
-    private MediaService ms;
+    private MediaService ms = new MediaServiceImpl();
 
 
     /**
      * Default c'tor.
      */
-    @Inject
-    public MediaResource(MediaServiceImpl ms) {
-        this.ms = ms;
+    //@Inject
+    public MediaResource() {
+        //this.ms = ms;
     }
 
 

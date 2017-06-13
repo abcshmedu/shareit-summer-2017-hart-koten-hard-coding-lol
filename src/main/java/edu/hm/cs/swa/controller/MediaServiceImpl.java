@@ -3,6 +3,8 @@ package edu.hm.cs.swa.controller;
 import edu.hm.cs.swa.model.Book;
 import edu.hm.cs.swa.model.Disc;
 import edu.hm.cs.swa.model.Medium;
+import edu.hm.cs.swa.persistence.DataBase;
+import edu.hm.cs.swa.persistence.DataBaseImpl;
 
 import java.util.HashMap;
 
@@ -16,6 +18,8 @@ public class MediaServiceImpl implements MediaService {
     private HashMap<String, Book> bookHashMap = new HashMap<>();
 
     private HashMap<String, Disc> discHashMap = new HashMap<>();
+
+    private DataBase db = new DataBaseImpl();
 
 
     /**
@@ -40,6 +44,7 @@ public class MediaServiceImpl implements MediaService {
             msr = MediaServiceResult.AUTHOR_OR_TITLE_MISSING;
         } else {
             bookHashMap.put(newBook.getIsbn(), newBook);
+            db.createBook(newBook);
         }
 
         return msr;
