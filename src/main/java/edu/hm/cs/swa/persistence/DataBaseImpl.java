@@ -6,6 +6,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import java.util.List;
+
 /**
  * Created by Jojo on 13.06.2017.
  */
@@ -43,17 +45,21 @@ public class DataBaseImpl implements DataBase {
 
 
     @Override
-    public void getBook(String isbn) {
+    public Book getBook(String isbn) {
         dataManager = ShareitServletContextListener.getInjectorInstance().getInstance(
                 SessionFactory.class).getCurrentSession();
         transaction = dataManager.beginTransaction();
         Book book = dataManager.get(Book.class, isbn);
+        transaction.commit();
+        dataManager.flush();
+        dataManager.close();
+        return book;
 
     }
 
 
     @Override
-    public void getBooks() {
+    public List<Book> getBooks() {
         dataManager = ShareitServletContextListener.getInjectorInstance().getInstance(
                 SessionFactory.class).getCurrentSession();
         transaction = dataManager.beginTransaction();
