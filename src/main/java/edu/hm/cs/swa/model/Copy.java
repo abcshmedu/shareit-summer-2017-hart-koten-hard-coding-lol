@@ -1,10 +1,15 @@
 package edu.hm.cs.swa.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 /**
  * Copy class for a Medium.
  * @author Johannes Seidel, Michael Reile.
  *
  */
+@Entity
+@Table(name = "Copy")
 public class Copy {
 
     private final Medium medium;

@@ -1,10 +1,16 @@
 package edu.hm.cs.swa.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * Model class for a book.
  *
  * @author Johannes Seidel, Michael Reile.
  */
+@Entity
+@Table(name = "Book")
 public class Book extends Medium {
 
     /**
@@ -15,7 +21,7 @@ public class Book extends Medium {
     /**
      * String representation of the isbn number.
      */
-    private String isbn;
+    @Id private String isbn;
 
     private String title;
 
