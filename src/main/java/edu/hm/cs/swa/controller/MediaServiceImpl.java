@@ -127,6 +127,19 @@ public class MediaServiceImpl implements MediaService {
 
 
     @Override
+    public String getCookie(final String token) {
+        return "passt schone";
+        //        ClientConfig config = new DefaultClientConfig();
+        //      Client client = Client.create(config);
+        //    WebResource webResource = client.resource(UriBuilder.fromUri(authServiceLink).build());
+        //  JSONObject body = new JSONObject();
+        //body.put("token", token);
+        //ClientResponse response = webResource.type(MediaType.APPLICATION_JSON).post(ClientResponse.class, body.toString());
+        //String result = response.getEntity(String.class);
+    }
+
+
+    @Override
     public Medium getBook(String isbn) {
         return bookHashMap.get(isbn);
     }

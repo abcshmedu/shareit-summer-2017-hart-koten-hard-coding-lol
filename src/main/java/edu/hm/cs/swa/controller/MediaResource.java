@@ -9,11 +9,9 @@ import org.json.JSONArray;
 
 import javax.inject.Singleton;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Cookie;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * REST-API for ShareIt Service.
@@ -44,20 +42,30 @@ public class MediaResource {
     @Path("/books")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createBook(Book book) {
-        MediaServiceResult msr = ms.addBook(book);
-        //      JSONObject json = new JSONObject();
+    public Response createBook(@CookieParam("token") Cookie token, Book book) {
+        String result = "jo";
+        if (token != null) {
+            result = ms.getCookie(token.getValue());
+        }
+
+        if (!result.equals("")) {
+            System.out.println("jo ich gehe ab a\nlter");
+            MediaServiceResult msr = ms.addBook(book);
+            //      JSONObject json = new JSONObject();
 //        json.put("status:", msr.getStatus());
 
-        //    return Response.status(msr.getCode()).entity(json).build();
-        //ObjectMapper mapper = new ObjectMapper();
-        //String json = "";
-        //try {
-        //  json = mapper.writeValueAsString(msr.getStatus());
-        //} catch (JsonProcessingException e) {
-        //  e.printStackTrace();
-        //}
-        return Response.status(msr.getCode()).build();
+            //    return Response.status(msr.getCode()).entity(json).build();
+            //ObjectMapper mapper = new ObjectMapper();
+            //String json = "";
+            //try {
+            //  json = mapper.writeValueAsString(msr.getStatus());
+            //} catch (JsonProcessingException e) {
+            //  e.printStackTrace();
+            //}
+            return Response.status(msr.getCode()).build();
+        } else {
+            return Response.status(Response.Status.UNAUTHORIZED).build();
+        }
     }
 
 
@@ -70,15 +78,25 @@ public class MediaResource {
     @GET
     @Path("/books/{isbn}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getBook(@PathParam("isbn") String isbn) {
-        final Medium searchedBook = ms.getBook(isbn);
+    public Response getBook(@CookieParam("token") Cookie token, @PathParam("isbn") String isbn) {
+        String result = "";
+        if (token != null) {
+            result = ms.getCookie(token.getValue());
+        }
 
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            String json = mapper.writeValueAsString(searchedBook);
-            return Response.status(Response.Status.OK).entity(json).build();
-        } catch (JsonProcessingException e) {
-            return Response.status(Response.Status.EXPECTATION_FAILED).build();
+        if (!result.equals("")) {
+
+            final Medium searchedBook = ms.getBook(isbn);
+
+            ObjectMapper mapper = new ObjectMapper();
+            try {
+                String json = mapper.writeValueAsString(searchedBook);
+                return Response.status(Response.Status.OK).entity(json).build();
+            } catch (JsonProcessingException e) {
+                return Response.status(Response.Status.EXPECTATION_FAILED).build();
+            }
+        } else {
+            return Response.status(Response.Status.UNAUTHORIZED).build();
         }
     }
 
@@ -91,26 +109,35 @@ public class MediaResource {
     @GET
     @Path("/books")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getBooks() {
+    public Response getBooks(@CookieParam("token") Cookie token) {
         //return (Book[]) ms.getBooks();
-        Book[] allBooks =  ms.getBooks();
-
-        JSONArray jsonArray = new JSONArray();
-        ObjectMapper mapper = new ObjectMapper();
-
- //       List<Book> allB = Arrays.stream(allBooks).collect(Collectors.toList());
-        try {
-            String result = mapper.writeValueAsString(allBooks);
-            return Response.status(Response.Status.OK).entity(result).build();
-
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
+        String answer = "jo";
+        if (token != null) {
+            answer = ms.getCookie(token.getValue());
         }
 
-        for (Medium book : allBooks) {
+        if (!answer.equals("")) {
+            Book[] allBooks = ms.getBooks();
 
+            JSONArray jsonArray = new JSONArray();
+            ObjectMapper mapper = new ObjectMapper();
+
+            //       List<Book> allB = Arrays.stream(allBooks).collect(Collectors.toList());
+            try {
+                String result = mapper.writeValueAsString(allBooks);
+                return Response.status(Response.Status.OK).entity(result).build();
+
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+            }
+
+            for (Medium book : allBooks) {
+
+            }
+            return Response.status(Response.Status.OK).entity(jsonArray.toString()).build();
+        } else {
+            return Response.status(Response.Status.UNAUTHORIZED).build();
         }
-        return Response.status(Response.Status.OK).entity(jsonArray.toString()).build();
     }
 
 
@@ -124,10 +151,20 @@ public class MediaResource {
     @Path("/books/{isbn}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response updateBook(Book book) {
-        MediaServiceResult msr = ms.updateBook(book);
+    public Response updateBook(@CookieParam("token") Cookie token, Book book) {
+        String result = "";
+        if (token != null) {
+            result = ms.getCookie(token.getValue());
+        }
+        if (!result.equals("")) {
 
-        return Response.status(msr.getCode()).entity(msr.getStatus()).build();
+            MediaServiceResult msr = ms.updateBook(book);
+
+            return Response.status(msr.getCode()).entity(msr.getStatus()).build();
+
+        } else {
+            return Response.status(Response.Status.UNAUTHORIZED).build();
+        }
     }
 
 
@@ -141,10 +178,19 @@ public class MediaResource {
     @Path("/discs")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createDisc(Disc disc) {
-        MediaServiceResult msr = ms.addDisc(disc);
+    public Response createDisc(@CookieParam("token") Cookie token, Disc disc) {
+        String result = "";
+        if (token != null) {
+            result = ms.getCookie(token.getValue());
+        }
+        if (!result.equals("")) {
 
-        return Response.status(msr.getCode()).build();
+            MediaServiceResult msr = ms.addDisc(disc);
+
+            return Response.status(msr.getCode()).build();
+        } else {
+            return Response.status(Response.Status.UNAUTHORIZED).build();
+        }
     }
 
 
@@ -157,16 +203,24 @@ public class MediaResource {
     @GET
     @Path("/discs/{barcode}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getDisc(@PathParam("barcode") String barcode) {
+    public Response getDisc(@CookieParam("token") Cookie token, @PathParam("barcode") String barcode) {
+        String result = "";
+        if (token != null) {
+            result = ms.getCookie(token.getValue());
+        }
+        if (!result.equals("")) {
 
-        final Medium searchedDisc = ms.getDisc(barcode);
+            final Medium searchedDisc = ms.getDisc(barcode);
 
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            String json = mapper.writeValueAsString(searchedDisc);
-            return Response.status(Response.Status.OK).entity(json).build();
-        } catch (JsonProcessingException e) {
-            return Response.status(Response.Status.EXPECTATION_FAILED).build();
+            ObjectMapper mapper = new ObjectMapper();
+            try {
+                String json = mapper.writeValueAsString(searchedDisc);
+                return Response.status(Response.Status.OK).entity(json).build();
+            } catch (JsonProcessingException e) {
+                return Response.status(Response.Status.EXPECTATION_FAILED).build();
+            }
+        } else {
+            return Response.status(Response.Status.UNAUTHORIZED).build();
         }
     }
 
@@ -179,16 +233,25 @@ public class MediaResource {
     @GET
     @Path("/discs")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getDiscs() {
+    public Response getDiscs(@CookieParam("token") Cookie token) {
 
-        final Disc[] allDiscs = (Disc[]) ms.getDiscs();
-
-        JSONArray jsonArray = new JSONArray();
-
-        for (Disc disc : allDiscs) {
-            jsonArray.put(disc.getTitle());
+        String result = "";
+        if (token != null) {
+            result = ms.getCookie(token.getValue());
         }
-        return Response.status(Response.Status.OK).entity(jsonArray.toString()).build();
+        if (!result.equals("")) {
+
+            final Disc[] allDiscs = (Disc[]) ms.getDiscs();
+
+            JSONArray jsonArray = new JSONArray();
+
+            for (Disc disc : allDiscs) {
+                jsonArray.put(disc.getTitle());
+            }
+            return Response.status(Response.Status.OK).entity(jsonArray.toString()).build();
+        } else {
+            return Response.status(Response.Status.UNAUTHORIZED).build();
+        }
     }
 
 
@@ -202,9 +265,18 @@ public class MediaResource {
     @Path("/discs/{barcode}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response updateDisc(Disc disc) {
-        MediaServiceResult msr = ms.updateDisc(disc);
+    public Response updateDisc(@CookieParam("token") Cookie token, Disc disc) {
+        String result = "";
+        if (token != null) {
+            result = ms.getCookie(token.getValue());
+        }
+        if (!result.equals("")) {
 
-        return Response.status(msr.getCode()).entity(msr.getStatus()).build();
+            MediaServiceResult msr = ms.updateDisc(disc);
+
+            return Response.status(msr.getCode()).entity(msr.getStatus()).build();
+        } else {
+            return Response.status(Response.Status.UNAUTHORIZED).build();
+        }
     }
 }
