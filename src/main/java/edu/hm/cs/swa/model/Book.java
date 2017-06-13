@@ -21,8 +21,12 @@ public class Book extends Medium {
     /**
      * String representation of the isbn number.
      */
-    @Id private String isbn;
+    @Id
+    private String isbn;
 
+    /**
+     * String represantation of the title
+     */
     private String title;
 
 
