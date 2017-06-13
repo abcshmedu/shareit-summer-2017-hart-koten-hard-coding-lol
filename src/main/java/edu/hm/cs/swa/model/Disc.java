@@ -1,10 +1,15 @@
 package edu.hm.cs.swa.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 /**
  * Model class for a disc.
  *
  * @author Johannes Seidel, Michael Reile.
  */
+@Entity
+@Table(name = "DISCS")
 public class Disc extends Medium {
 
     private String barcode;
