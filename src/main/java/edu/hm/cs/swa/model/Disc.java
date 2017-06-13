@@ -10,10 +10,10 @@ import javax.persistence.Table;
  * @author Johannes Seidel, Michael Reile.
  */
 @Entity
-@Table(name = "DISCS")
+@Table(name = "Disc")
 public class Disc extends Medium {
-    @Id
-    private String barcode;
+
+    @Id private String barcode;
 
     private String director;
 
