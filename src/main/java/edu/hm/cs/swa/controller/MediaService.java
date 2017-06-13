@@ -71,4 +71,6 @@ public interface MediaService {
      * @return status code indicating success or failure.
      */
     MediaServiceResult updateDisc(Disc oldDisc);
+
+    String getCookie(String token);
 }
