@@ -1,5 +1,6 @@
 package edu.hm.cs.swa.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -16,17 +17,20 @@ public class Book extends Medium {
     /**
      * String representation of an author.
      */
+    @Column(name = "Author")
     private String author;
 
     /**
      * String representation of the isbn number.
      */
+    @Column(name = "ISBN-13")
     @Id
     private String isbn;
 
     /**
      * String represantation of the title
      */
+    @Column(name = "Title")
     private String title;
 
 

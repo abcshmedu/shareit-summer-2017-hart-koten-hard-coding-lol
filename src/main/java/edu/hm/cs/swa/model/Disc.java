@@ -1,5 +1,6 @@
 package edu.hm.cs.swa.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -13,12 +14,16 @@ import javax.persistence.Table;
 @Table(name = "Disc")
 public class Disc extends Medium {
 
+    @Column(name = "Barcode")
     @Id private String barcode;
 
+    @Column(name = "Director")
     private String director;
 
+    @Column(name = "FSK")
     private int fsk;
 
+    @Column(name = "Title")
     private String title;
 
 
