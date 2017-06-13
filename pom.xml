@@ -92,7 +92,7 @@
     </dependency>
   </dependencies>
   <build>
-    <finalName>demowebapp</finalName>
+    <finalName>Shareit</finalName>
     <sourceDirectory>src/main/java</sourceDirectory>
     <plugins>
       <plugin>
