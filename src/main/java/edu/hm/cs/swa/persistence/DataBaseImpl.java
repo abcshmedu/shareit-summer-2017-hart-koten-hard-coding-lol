@@ -66,5 +66,7 @@ public class DataBaseImpl implements DataBase {
         dataManager = ShareitServletContextListener.getInjectorInstance().getInstance(
                 SessionFactory.class).getCurrentSession();
         transaction = dataManager.beginTransaction();
+
+
     }
 }

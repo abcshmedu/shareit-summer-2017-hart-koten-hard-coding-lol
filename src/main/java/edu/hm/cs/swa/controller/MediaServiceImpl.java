@@ -5,7 +5,6 @@ import edu.hm.cs.swa.model.Book;
 import edu.hm.cs.swa.model.Disc;
 import edu.hm.cs.swa.model.Medium;
 import edu.hm.cs.swa.persistence.DataBase;
-import edu.hm.cs.swa.persistence.DataBaseImpl;
 
 import java.util.HashMap;
 
@@ -75,11 +74,12 @@ public class MediaServiceImpl implements MediaService {
     @Override
     public Book[] getBooks() {
         Book[] allBooks = new Book[bookHashMap.values().size()];
-        int counter = 0;
-        for (Book book : bookHashMap.values()) {
-            allBooks[counter] = book;
-            counter++;
-        }
+        //int counter = 0;
+        //for (Book book : bookHashMap.values()) {
+        //  allBooks[counter] = book;
+        //counter++;
+        //}
+        allBooks = db.getBooks().toArray(new Book[0]);
         return allBooks;
         //return bookHashMap.values().toArray(new Book[bookHashMap.size()]);
     }
@@ -101,14 +101,15 @@ public class MediaServiceImpl implements MediaService {
     @Override
     public MediaServiceResult updateBook(Book newBook) {
         final MediaServiceResult result;
-        final Book bookToChange = bookHashMap.get(newBook.getIsbn());
-
+        //final Book bookToChange = bookHashMap.get(newBook.getIsbn());
+        final Book bookToChange = db.getBook(newBook.getIsbn());
         if (bookToChange == null) {
             result = MediaServiceResult.ISBN_NOT_FOUND;
         } else if (newBook.getAuthor() == null || newBook.getTitle() == null) {
             result = MediaServiceResult.AUTHOR_OR_TITLE_MISSING;
         } else {
-            bookHashMap.replace(newBook.getIsbn(), newBook);
+            //bookHashMap.replace(newBook.getIsbn(), newBook);
+            db.updateBook(newBook);
             result = MediaServiceResult.OK;
         }
 
@@ -149,7 +150,8 @@ public class MediaServiceImpl implements MediaService {
 
     @Override
     public Medium getBook(String isbn) {
-        return bookHashMap.get(isbn);
+        //return bookHashMap.get(isbn);
+        return db.getBook(isbn);
     }
 
 
