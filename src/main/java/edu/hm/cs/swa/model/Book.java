@@ -1,9 +1,6 @@
 package edu.hm.cs.swa.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Model class for a book.
@@ -25,6 +22,7 @@ public class Book extends Medium {
      */
     @Column(name = "ISBN-13")
     @Id
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private String isbn;
 
     /**

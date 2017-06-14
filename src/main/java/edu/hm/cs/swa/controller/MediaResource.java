@@ -6,6 +6,8 @@ import com.google.inject.Inject;
 import edu.hm.cs.swa.model.Book;
 import edu.hm.cs.swa.model.Disc;
 import edu.hm.cs.swa.model.Medium;
+import edu.hm.cs.swa.persistence.DataBase;
+import edu.hm.cs.swa.persistence.DataBaseImpl;
 import org.json.JSONArray;
 
 import javax.inject.Singleton;
@@ -23,15 +25,15 @@ import javax.ws.rs.core.Response;
 @Path("/media")
 public class MediaResource {
 
-    private MediaService ms;
+    private DataBase db = new DataBaseImpl();
+
+    private MediaService ms = new MediaServiceImpl(db);
 
 
     /**
      * Default c'tor.
      */
-    @Inject
     public MediaResource() {
-        this.ms = ms;
     }
 
 

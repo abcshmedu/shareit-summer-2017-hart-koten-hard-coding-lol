@@ -20,14 +20,14 @@ public class MediaServiceImpl implements MediaService {
 
     private HashMap<String, Disc> discHashMap = new HashMap<>();
 
-    private DataBaseImpl db;
+    private final DataBase db;
 
 
     /**
      * Default c'tor.
      */
     @Inject
-    public MediaServiceImpl(DataBaseImpl db) {
+    public MediaServiceImpl(DataBase db) {
         this.db = db;
     }
 

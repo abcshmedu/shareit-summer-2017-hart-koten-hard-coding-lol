@@ -8,10 +8,12 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.servlet.GuiceServletContextListener;
 import com.google.inject.servlet.ServletModule;
-import edu.hm.cs.swa.controller.MediaPersistence;
-import edu.hm.cs.swa.controller.MediaPersistenceImpl;
 import edu.hm.cs.swa.controller.MediaService;
 import edu.hm.cs.swa.controller.MediaServiceImpl;
+import edu.hm.cs.swa.persistence.DataBase;
+import edu.hm.cs.swa.persistence.DataBaseImpl;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 
 /**
  * Context Listener to enable usage of google guice together with jersey.
@@ -24,7 +26,8 @@ public class ShareitServletContextListener extends GuiceServletContextListener {
         @Override
         protected void configureServlets() {
             bind(MediaService.class).to(MediaServiceImpl.class);
-            bind(MediaPersistence.class).to(MediaPersistenceImpl.class);
+            bind(DataBase.class).to(DataBaseImpl.class);
+            bind(SessionFactory.class).toInstance(new Configuration().configure().buildSessionFactory());
         }
     });
 
