@@ -1,10 +1,12 @@
 package edu.hm.cs.swa.controller;
 
 import com.google.inject.Inject;
+import edu.hm.cs.swa.guice.ShareitServletContextListener;
 import edu.hm.cs.swa.model.Book;
 import edu.hm.cs.swa.model.Disc;
 import edu.hm.cs.swa.model.Medium;
 import edu.hm.cs.swa.persistence.DataBase;
+import edu.hm.cs.swa.persistence.DataBaseImpl;
 
 import java.util.HashMap;
 
@@ -19,15 +21,13 @@ public class MediaServiceImpl implements MediaService {
 
     private HashMap<String, Disc> discHashMap = new HashMap<>();
 
-    private final DataBase db;
+    @Inject private final DataBase db = ShareitServletContextListener.getInjectorInstance().getInstance(DataBase.class);
 
 
     /**
      * Default c'tor.
      */
-    @Inject
-    public MediaServiceImpl(DataBase db) {
-        this.db = db;
+    public MediaServiceImpl() {
     }
 
 

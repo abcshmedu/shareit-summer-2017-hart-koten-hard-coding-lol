@@ -35,7 +35,7 @@ public class MediaServiceImplTest {
 
     private DataBaseImpl db = new DataBaseImpl();
 
-    private MediaServiceImpl msi = new MediaServiceImpl(db);
+    private MediaServiceImpl msi = new MediaServiceImpl();
 
 
     @Test
