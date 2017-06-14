@@ -5,7 +5,6 @@ import edu.hm.cs.swa.controller.MediaServiceResult;
 import edu.hm.cs.swa.model.Book;
 import edu.hm.cs.swa.model.Disc;
 import edu.hm.cs.swa.model.Medium;
-import edu.hm.cs.swa.persistence.DataBase;
 import edu.hm.cs.swa.persistence.DataBaseImpl;
 import org.junit.Test;
 
