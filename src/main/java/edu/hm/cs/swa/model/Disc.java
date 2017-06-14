@@ -52,43 +52,26 @@ public class Disc extends Medium {
 
 
     @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = super.hashCode();
-        result = prime * result + ((barcode == null) ? 0 : barcode.hashCode());
-        result = prime * result + ((director == null) ? 0 : director.hashCode());
-        result = prime * result + fsk;
-        return result;
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Disc)) return false;
+
+        final Disc disc = (Disc) o;
+
+        if (getFsk() != disc.getFsk()) return false;
+        if (!getBarcode().equals(disc.getBarcode())) return false;
+        if (!getDirector().equals(disc.getDirector())) return false;
+        return getTitle().equals(disc.getTitle());
     }
 
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (!super.equals(obj)) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        Disc other = (Disc) obj;
-        if (barcode == null) {
-            if (other.barcode != null) {
-                return false;
-            }
-        } else if (!barcode.equals(other.barcode)) {
-            return false;
-        }
-        if (director == null) {
-            if (other.director != null) {
-                return false;
-            }
-        } else if (!director.equals(other.director)) {
-            return false;
-        }
-        return fsk == other.fsk;
+    public int hashCode() {
+        int result = getBarcode().hashCode();
+        result = 31 * result + getDirector().hashCode();
+        result = 31 * result + getFsk();
+        result = 31 * result + getTitle().hashCode();
+        return result;
     }
 
 

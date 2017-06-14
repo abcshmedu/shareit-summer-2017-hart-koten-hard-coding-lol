@@ -27,10 +27,10 @@ public class DiscTest {
                      ", title='" + title + '\'' +
                      '}', disc.toString());
 
-        equalsTest();
+
     }
 
-
+    @Test
     public void equalsTest() {
         Disc disc = new Disc(barcode, director, fsk, title);
         Disc anotherDisc = new Disc(barcode, director, fsk, title);

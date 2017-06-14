@@ -12,15 +12,15 @@ import static org.junit.Assert.*;
 
 public class MediaServiceImplTest {
 
-    private Book book = new Book("Hermann Hesse", "0192301293012930", "Steppenwolf");
+    private Book book = new Book("Hermann Hesse", "978-3-12-732320-7", "Steppenwolf");
 
     private Book book1 = new Book("Hermann Hesse", null, "Steppenwolf");
 
-    private Book book2 = new Book(null, "0192301293012930", "Steppenwolf");
+    private Book book2 = new Book(null, "978-3-12-732320-7", "Steppenwolf");
 
-    private Book book3 = new Book("Hermann Hesse", "0192301293", null);
+    private Book book3 = new Book("Hermann Hesse", "978-3-833-43460-0", null);
 
-    private Book book4 = new Book(null, "01923012930", "Steppenwold");
+    private Book book4 = new Book(null, "978-3-406-61662-4", "Steppenwold");
 
     private final Disc disc = new Disc("123456789", "Jesus Christ Superstar", 18, "keine Ahnung");
 
@@ -42,7 +42,7 @@ public class MediaServiceImplTest {
         MediaServiceResult msr = msi.addBook(book);
         assertEquals(msr, MediaServiceResult.OK);
         msr = msi.addBook(book1);
-        assertEquals(msr, MediaServiceResult.ISBN_NOT_FOUND);
+        assertEquals(msr, MediaServiceResult.INVALID_ISBN);
         msr = msi.addBook(book2);
         assertEquals(msr, MediaServiceResult.ISBN_TAKEN);
         msr = msi.addBook(book3);
@@ -70,7 +70,7 @@ public class MediaServiceImplTest {
     @Test
     public void getBookTest() {
         msi.addBook(this.book);
-        Medium book = msi.getBook("0192301293012930");
+        Medium book = msi.getBook("978-3-12-732320-7");
         assertEquals(book, this.book);
         book = msi.getBook("voirjefwhgbiksjhbgfn");
         assertEquals(book, null);
@@ -114,14 +114,14 @@ public class MediaServiceImplTest {
     @Test
     public void updateBookTest() {
         msi.addBook(book);
-        Book newBook = new Book("niemand", "0192301293012930", "was immer man will");
+        Book newBook = new Book("niemand", "978-3-12-732320-7", "was immer man will");
         MediaServiceResult msr = msi.updateBook(newBook);
         assertEquals(msr, MediaServiceResult.OK);
         msr = msi.updateBook(new Book("pifn", "jedbhfgv", "dfljh"));
         assertEquals(msr, MediaServiceResult.ISBN_NOT_FOUND);
-        msr = msi.updateBook(new Book(null, "0192301293012930", "edhbgf"));
+        msr = msi.updateBook(new Book(null, "978-3-12-732320-7", "edhbgf"));
         assertEquals(msr, MediaServiceResult.AUTHOR_OR_TITLE_MISSING);
-        msr = msi.updateBook(new Book("dpoihg", "0192301293012930", null));
+        msr = msi.updateBook(new Book("dpoihg", "978-3-12-732320-7", null));
         assertEquals(msr, MediaServiceResult.AUTHOR_OR_TITLE_MISSING);
     }
 
