@@ -21,13 +21,12 @@ import javax.ws.rs.core.Response;
  *
  * @author Johannes Seidel, Michael Reile.
  */
-@Singleton
 @Path("/media")
 public class MediaResource {
 
     private DataBase db = new DataBaseImpl();
 
-    private MediaService ms = new MediaServiceImpl(db);
+    private final MediaService ms = new MediaServiceImpl(db);
 
 
     /**
