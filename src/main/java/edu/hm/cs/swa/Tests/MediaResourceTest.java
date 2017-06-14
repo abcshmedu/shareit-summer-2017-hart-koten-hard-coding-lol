@@ -69,33 +69,39 @@ public class MediaResourceTest {
         assertEquals(responseUNAUTH, resourceMock.createDisc(tokenMock, discMock));
     }
 
+
     @Test
     public void getBookTestSuccess() {
         when(resourceMock.getBook(tokenMock, ISBN)).thenReturn(responseOK);
         assertEquals(responseOK, resourceMock.getBook(tokenMock, ISBN));
     }
 
+
     @Test
     public void getBookTestFail() {
-        when(resourceMock.getBook(tokenMock,ISBN)).thenReturn(responseUNAUTH);
+        when(resourceMock.getBook(tokenMock, ISBN)).thenReturn(responseUNAUTH);
         assertEquals(responseUNAUTH, resourceMock.getBook(tokenMock, ISBN));
     }
 
+
     @Test
     public void getDiscTestSuccess() {
-        when(resourceMock.getDisc(tokenMock,ISBN)).thenReturn(responseOK);
+        when(resourceMock.getDisc(tokenMock, ISBN)).thenReturn(responseOK);
         assertEquals(responseOK, resourceMock.getDisc(tokenMock, ISBN));
     }
 
+
     @Test
     public void getDiscTestFail() {
-        when(resourceMock.getDisc(tokenMock,ISBN)).thenReturn(responseUNAUTH);
+        when(resourceMock.getDisc(tokenMock, ISBN)).thenReturn(responseUNAUTH);
         assertEquals(responseUNAUTH, resourceMock.getDisc(tokenMock, ISBN));
     }
+
 
     @Test
     public void updateBookTestSuccess() {
         when(resourceMock.updateBook(tokenMock, bookMock)).thenReturn(responseOK);
+        assertEquals(responseOK, resourceMock.updateBook(tokenMock, bookMock));
     }
 
 }

@@ -17,6 +17,7 @@ public class DataBaseImpl implements DataBase {
 
     private Transaction transaction;
 
+
     public DataBaseImpl() {
     }
 
@@ -25,7 +26,9 @@ public class DataBaseImpl implements DataBase {
     public void createBook(Book book) {
         dataManager = ShareitServletContextListener.getInjectorInstance().getInstance(
                 SessionFactory.class).getCurrentSession();
-        transaction = dataManager.beginTransaction();
+        if (transaction == null || !transaction.isActive()) {
+            transaction = dataManager.beginTransaction();
+        }
         dataManager.saveOrUpdate(book);
         transaction.commit();
     }
@@ -35,7 +38,9 @@ public class DataBaseImpl implements DataBase {
     public void deleteBook(Book book) {
         dataManager = ShareitServletContextListener.getInjectorInstance().getInstance(
                 SessionFactory.class).getCurrentSession();
-        transaction = dataManager.beginTransaction();
+        if (transaction == null || !transaction.isActive()) {
+            transaction = dataManager.beginTransaction();
+        }
         dataManager.delete(book);
     }
 
@@ -45,7 +50,9 @@ public class DataBaseImpl implements DataBase {
 
         dataManager = ShareitServletContextListener.getInjectorInstance().getInstance(
                 SessionFactory.class).getCurrentSession();
-        transaction = dataManager.beginTransaction();
+        if (transaction == null || !transaction.isActive()) {
+            transaction = dataManager.beginTransaction();
+        }
         Book book = dataManager.get(Book.class, isbn);
         transaction.commit();
         return book;
@@ -56,7 +63,9 @@ public class DataBaseImpl implements DataBase {
     public List<Book> getBooks() {
         dataManager = ShareitServletContextListener.getInjectorInstance().getInstance(
                 SessionFactory.class).getCurrentSession();
-        transaction = dataManager.beginTransaction();
+        if (transaction == null || !transaction.isActive()) {
+            transaction = dataManager.beginTransaction();
+        }
         return dataManager.createQuery("From Book").list();
     }
 
@@ -65,8 +74,8 @@ public class DataBaseImpl implements DataBase {
     public void updateBook(Book book) {
         dataManager = ShareitServletContextListener.getInjectorInstance().getInstance(
                 SessionFactory.class).getCurrentSession();
-        transaction = dataManager.beginTransaction();
-
-
+        if (transaction == null || !transaction.isActive()) {
+            transaction = dataManager.beginTransaction();
+        }
     }
 }
