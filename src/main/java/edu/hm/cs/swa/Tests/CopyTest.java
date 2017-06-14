@@ -8,7 +8,6 @@ public class CopyTest {
 
     @Test
     public void test() {
-        fail("Not yet implemented");
         System.out.println("Kot");
     }
 

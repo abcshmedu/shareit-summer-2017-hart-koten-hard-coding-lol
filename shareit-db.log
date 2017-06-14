@@ -1,0 +1,5 @@
+/*C4*/SET SCHEMA PUBLIC
+drop table Book if exists
+drop table Disc if exists
+create table Book (isbn varchar(255) not null, Author varchar(255), Title varchar(255), primary key (isbn))
+create table Disc (Barcode varchar(255) not null, Director varchar(255), FSK integer, Title varchar(255), primary key (Barcode))
