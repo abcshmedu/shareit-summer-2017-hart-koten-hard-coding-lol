@@ -1,5 +1,6 @@
 package edu.hm.cs.swa.controller;
 
+import com.google.inject.Inject;
 import edu.hm.cs.swa.model.Book;
 import edu.hm.cs.swa.model.Disc;
 import edu.hm.cs.swa.model.Medium;
@@ -19,14 +20,15 @@ public class MediaServiceImpl implements MediaService {
 
     private HashMap<String, Disc> discHashMap = new HashMap<>();
 
-    private DataBase db = new DataBaseImpl();
+    private DataBase db;
 
 
     /**
      * Default c'tor.
      */
-    public MediaServiceImpl() {
-
+    @Inject
+    public MediaServiceImpl(DataBaseImpl db) {
+        this.db = db;
     }
 
 

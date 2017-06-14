@@ -67,7 +67,7 @@ public class DataBaseImpl implements DataBase {
         dataManager = ShareitServletContextListener.getInjectorInstance().getInstance(
                 SessionFactory.class).getCurrentSession();
         transaction = dataManager.beginTransaction();
-        List<Book> books = dataManager.createQuery("From Book").list();
+        List books = dataManager.createQuery("From Book").list();
         dataManager.flush();
         dataManager.close();
         return books;
