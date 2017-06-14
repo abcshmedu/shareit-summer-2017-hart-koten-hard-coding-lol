@@ -31,6 +31,7 @@ public class DataBaseImpl implements DataBase {
         }
         dataManager.saveOrUpdate(book);
         transaction.commit();
+        dataManager.close();
     }
 
 
@@ -42,6 +43,7 @@ public class DataBaseImpl implements DataBase {
             transaction = dataManager.beginTransaction();
         }
         dataManager.delete(book);
+        dataManager.close();
     }
 
 
@@ -55,6 +57,7 @@ public class DataBaseImpl implements DataBase {
         }
         Book book = dataManager.get(Book.class, isbn);
         transaction.commit();
+        dataManager.close();
         return book;
     }
 
@@ -66,7 +69,9 @@ public class DataBaseImpl implements DataBase {
         if (transaction == null || !transaction.isActive()) {
             transaction = dataManager.beginTransaction();
         }
-        return dataManager.createQuery("From Book").list();
+        List book = dataManager.createQuery("From Book").list();
+        dataManager.close();
+        return book;
     }
 
 
@@ -77,5 +82,6 @@ public class DataBaseImpl implements DataBase {
         if (transaction == null || !transaction.isActive()) {
             transaction = dataManager.beginTransaction();
         }
+        dataManager.close();
     }
 }
