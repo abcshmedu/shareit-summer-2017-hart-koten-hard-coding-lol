@@ -65,6 +65,7 @@ public class MediaServiceImpl implements MediaService {
             msr = MediaServiceResult.AUTHOR_OR_TITLE_MISSING;
         } else {
             discHashMap.put(newDisc.getBarcode(), newDisc);
+
         }
 
         return msr;

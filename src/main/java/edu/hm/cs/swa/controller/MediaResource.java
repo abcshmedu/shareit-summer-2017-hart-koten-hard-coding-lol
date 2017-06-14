@@ -54,7 +54,6 @@ public class MediaResource {
         }
 
         if (!result.equals("")) {
-            System.out.println("jo ich gehe ab a\nlter");
             MediaServiceResult msr = ms.addBook(book);
             //      JSONObject json = new JSONObject();
 //        json.put("status:", msr.getStatus());

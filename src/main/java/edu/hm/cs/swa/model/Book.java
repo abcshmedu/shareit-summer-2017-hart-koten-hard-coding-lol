@@ -20,13 +20,11 @@ public class Book extends Medium {
     /**
      * String representation of the isbn number.
      */
-    @Column(name = "ISBN-13")
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
     private String isbn;
 
     /**
-     * String represantation of the title
+     * String representation of the title
      */
     @Column(name = "Title")
     private String title;

@@ -5,17 +5,17 @@ import edu.hm.cs.swa.model.Book;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+
 import java.util.List;
 
 /**
- * Created by Jojo on 13.06.2017.
+ * Created by Jojo on 13.06.2017 easy life.
  */
 public class DataBaseImpl implements DataBase {
 
     private Session dataManager;
 
     private Transaction transaction;
-
 
     public DataBaseImpl() {
     }
@@ -26,11 +26,8 @@ public class DataBaseImpl implements DataBase {
         dataManager = ShareitServletContextListener.getInjectorInstance().getInstance(
                 SessionFactory.class).getCurrentSession();
         transaction = dataManager.beginTransaction();
-        dataManager.persist(book);
+        dataManager.saveOrUpdate(book);
         transaction.commit();
-        dataManager.flush();
-        dataManager.close();
-
     }
 
 
@@ -40,9 +37,6 @@ public class DataBaseImpl implements DataBase {
                 SessionFactory.class).getCurrentSession();
         transaction = dataManager.beginTransaction();
         dataManager.delete(book);
-        dataManager.flush();
-        dataManager.close();
-
     }
 
 
@@ -54,10 +48,7 @@ public class DataBaseImpl implements DataBase {
         transaction = dataManager.beginTransaction();
         Book book = dataManager.get(Book.class, isbn);
         transaction.commit();
-        dataManager.flush();
-        dataManager.close();
         return book;
-
     }
 
 
@@ -66,11 +57,7 @@ public class DataBaseImpl implements DataBase {
         dataManager = ShareitServletContextListener.getInjectorInstance().getInstance(
                 SessionFactory.class).getCurrentSession();
         transaction = dataManager.beginTransaction();
-        List books = dataManager.createQuery("From Book").list();
-        dataManager.flush();
-        dataManager.close();
-        return books;
-
+        return dataManager.createQuery("From Book").list();
     }
 
 
@@ -79,6 +66,5 @@ public class DataBaseImpl implements DataBase {
         dataManager = ShareitServletContextListener.getInjectorInstance().getInstance(
                 SessionFactory.class).getCurrentSession();
         transaction = dataManager.beginTransaction();
-
     }
 }
