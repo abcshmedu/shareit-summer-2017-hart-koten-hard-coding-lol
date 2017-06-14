@@ -5,21 +5,23 @@ import edu.hm.cs.swa.controller.MediaServiceResult;
 import edu.hm.cs.swa.model.Book;
 import edu.hm.cs.swa.model.Disc;
 import edu.hm.cs.swa.model.Medium;
+import edu.hm.cs.swa.persistence.DataBase;
+import edu.hm.cs.swa.persistence.DataBaseImpl;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class MediaServiceImplTest {
 
-    Book book = new Book("Hermann Hesse", "0192301293012930", "Steppenwolf");
+    private Book book = new Book("Hermann Hesse", "0192301293012930", "Steppenwolf");
 
-    Book book1 = new Book("Hermann Hesse", null, "Steppenwolf");
+    private Book book1 = new Book("Hermann Hesse", null, "Steppenwolf");
 
-    Book book2 = new Book(null, "0192301293012930", "Steppenwolf");
+    private Book book2 = new Book(null, "0192301293012930", "Steppenwolf");
 
-    Book book3 = new Book("Hermann Hesse", "0192301293", null);
+    private Book book3 = new Book("Hermann Hesse", "0192301293", null);
 
-    Book book4 = new Book(null, "01923012930", "Steppenwold");
+    private Book book4 = new Book(null, "01923012930", "Steppenwold");
 
     private final Disc disc = new Disc("123456789", "Jesus Christ Superstar", 18, "keine Ahnung");
 
@@ -31,7 +33,9 @@ public class MediaServiceImplTest {
 
     private final Disc disc4 = new Disc("123", null, 18, "keine Ahnung");
 
-    MediaServiceImpl msi = new MediaServiceImpl();
+    private DataBaseImpl db = new DataBaseImpl();
+
+    private MediaServiceImpl msi = new MediaServiceImpl(db);
 
 
     @Test
